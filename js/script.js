@@ -36,7 +36,8 @@ function addExpense() {
         // Insert values
         date.innerHTML = formatted_date;
         type.innerHTML = expenseType.value;
-        ammount.innerHTML = `<span>£</span><span>${expenseAmmount.value}</span>`;
+        let expenseAmmountValue = parseFloat(expenseAmmount.value)
+        ammount.innerHTML = `<span>£</span><span>${expenseAmmountValue.toFixed(2)}</span>`;
         remove.innerHTML = `<span class="delete">X</span>`;
 
         // Reset values in input

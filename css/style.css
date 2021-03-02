@@ -79,6 +79,7 @@ input {
     padding: 4px;
     margin: 10px;
     background-color: rgb(35, 202, 146);
+    cursor: pointer;
 }
 
 #table {
@@ -107,4 +108,14 @@ input {
     font-weight: bold;
     padding: 0px;
     text-align: end;
+}
+
+.delete {
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.delete:hover {
+    cursor: pointer;
+    color: rgb(175, 38, 38);
 }
