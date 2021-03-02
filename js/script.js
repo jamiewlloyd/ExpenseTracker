@@ -5,7 +5,7 @@ let expenseAmmount = document.getElementById("ammount");
 let addButton = document.querySelector('.submit');
 // Grab the table
 let table = document.getElementById("tableBody");
-// Grab subtotals and total
+
 
 
 addButton.addEventListener('click', addExpense);
@@ -29,7 +29,7 @@ function addExpense() {
         // Insert values
         date.innerHTML = formatted_date;
         type.innerHTML = expenseType.value;
-        ammount.innerHTML = `<span>£</span><span class="subTotal">${expenseAmmount.value}</span>`;
+        ammount.innerHTML = `${expenseAmmount.value}`;
         remove.innerHTML = `<span class="delete">X</span>`;
 
         // Reset values in input
@@ -37,9 +37,21 @@ function addExpense() {
         expenseDate.value = "";
         expenseAmmount.value = "";
 
-        // Run Calculation - for loop
+        calculate();
     }
 }
 
-// Create calculation function
+// Calculation function
+function calculate() {
+    let total = document.getElementById("totalSum")
+    let table = document.getElementById("tableBody");
+    let sumVal = 0;
+
+    for (let i = 0; i < table.rows.length; i++) {
+        sumVal = sumVal + parseFloat(table.rows[i].cells[2].innerHTML);
+    }
+
+    total.innerHTML = `<span>£</span>${sumVal.toFixed(2)}`
+}
+
 // Create delete function
