@@ -3,11 +3,18 @@ let expenseType = document.getElementById("type");
 let expenseDate = document.getElementById("date");
 let expenseAmmount = document.getElementById("ammount");
 let addButton = document.querySelector('.submit');
+
 // Grab the table
 let table = document.getElementById("tableBody");
 
+// Check for Enter keypress 
+document.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        addExpense();
+    }
+});
 
-
+// Add click event to submit button
 addButton.addEventListener('click', addExpense);
 
 function addExpense() {
@@ -29,7 +36,7 @@ function addExpense() {
         // Insert values
         date.innerHTML = formatted_date;
         type.innerHTML = expenseType.value;
-        ammount.innerHTML = `${expenseAmmount.value}`;
+        ammount.innerHTML = `<span>£</span><span>${expenseAmmount.value}</span>`;
         remove.innerHTML = `<span class="delete">X</span>`;
 
         // Reset values in input
@@ -37,7 +44,10 @@ function addExpense() {
         expenseDate.value = "";
         expenseAmmount.value = "";
 
+        expenseType.focus();
+
         calculate();
+        setDelete();
     }
 }
 
@@ -48,10 +58,19 @@ function calculate() {
     let sumVal = 0;
 
     for (let i = 0; i < table.rows.length; i++) {
-        sumVal = sumVal + parseFloat(table.rows[i].cells[2].innerHTML);
+        sumVal = sumVal + parseFloat(table.rows[i].cells[2].lastChild.innerHTML);
     }
 
     total.innerHTML = `<span>£</span>${sumVal.toFixed(2)}`
 }
 
-// Create delete function
+// Delete button functionality
+function setDelete() {
+    document.querySelectorAll('.delete').forEach(item => {
+        item.addEventListener('click', event => {
+            event.target.parentElement.parentElement.remove();
+            calculate();
+        })
+    })
+
+}
