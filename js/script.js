@@ -7,6 +7,9 @@ let addButton = document.querySelector('.submit');
 // Grab the table
 let table = document.getElementById("tableBody");
 
+// Grab message
+let message = document.querySelector('.notify');
+
 // Check for Enter keypress 
 document.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
@@ -20,8 +23,18 @@ addButton.addEventListener('click', addExpense);
 function addExpense() {
 
     if (expenseType.value == "" || expenseDate.value == "" || expenseAmmount.value == "") {
-        alert("Please enter all information");
+        // Display error notification 
+        message.innerHTML = `<p>Please Complete All Fields</p>`
+        displayNotification('confirm', 'error');
+        hideNotification();
+
     } else {
+        // Display added notification 
+        message.innerHTML = `<p>Expense Added</p>`
+        displayNotification('error', 'confirm');
+        hideNotification();
+        // resetClass('confirm');
+
         // Create row and cells
         let row = table.insertRow(-1);
         let date = row.insertCell(0);
@@ -71,7 +84,25 @@ function setDelete() {
         item.addEventListener('click', event => {
             event.target.parentElement.parentElement.remove();
             calculate();
+
+            message.innerHTML = `<p>Expense Deleted</p>`
+            displayNotification('error', 'confirm');
+            hideNotification();
+            // resetClass('confirm');
         })
     })
 
+
+}
+
+function hideNotification() {
+    setTimeout(function () {
+        message.classList.add('hidden');
+    }, 2000);
+}
+
+function displayNotification(classToRemove, classToAdd) {
+    message.classList.remove(classToRemove);
+    message.classList.add(classToAdd);
+    message.classList.remove('hidden');
 }

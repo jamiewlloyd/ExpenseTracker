@@ -12,6 +12,9 @@
 <body>
     <div id="wrapper">
         <h1 class="title">Expense Tracker</h1>
+        <div class="notify hidden">
+            <p>Expense Added</p>
+        </div>
         <div class="inputs">
             <input type="text" id="type" name="type" placeholder="Expense type">
             <input type="date" id="date" name="date" placeholder="DD/MM/YYYY">
@@ -34,7 +37,7 @@
             <tfoot>
                 <tr>
                     <th id="total" colspan="2">Total :</th>
-                    <td id="totalSum"><span>£</span>00.00</td>
+                    <td id="totalSum"><span>£</span>0.00</td>
                 </tr>
             </tfoot>
         </table>
